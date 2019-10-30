@@ -3,7 +3,7 @@ import CompCard from './CompCard';
 import CompActionButton from './CompActionButton';
 
 // Pass elements from reducers
-const CompList = ({title, cards}) => {
+const CompList = ({ title, cards, listID }) => {
     return (
         <div style={styles.container}>
         <h4>{title}</h4>
@@ -11,7 +11,7 @@ const CompList = ({title, cards}) => {
         {cards.map(card => (
             <CompCard key={card.id} text={card.text} />
        ))}
-            <CompActionButton />
+            <CompActionButton listID={listID}/>
         </div>
     )
 };

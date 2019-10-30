@@ -3,6 +3,8 @@ import Icon from '@material-ui/core/Icon';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import Textarea from 'react-textarea-autosize';
+import { connect } from "react-redux";
+import { addList, addCard } from '../actions';
 
 class CompActionButton extends React.Component {
 
@@ -26,6 +28,32 @@ class CompActionButton extends React.Component {
         this.setState({
             text: e.target.value
         });
+    };
+
+    handleAddList = () => {
+        const { dispatch } = this.props;
+        const { text } = this.state;
+
+        if(text) {
+            this.setState({
+                text: ""
+            });
+            dispatch(addList(text));
+        }
+
+        return;
+    };
+
+    handleAddCard = () => {
+        const { dispatch, listID } = this.props;
+        const { text } = this.state;
+
+        if(text) {
+            this.setState({
+                text: ""
+            });
+            dispatch(addCard(listID, text));
+        }
     };
 
     //Handles pre click state of add card
@@ -80,6 +108,7 @@ class CompActionButton extends React.Component {
                     onBlur={this.closeForm}
                     value={this.state.text}
                     onChange={this.handleInputChange}
+                    // Inline CSS need to move it to external file
                     style={{
                         resize: "none",
                         width: "100%",
@@ -89,7 +118,8 @@ class CompActionButton extends React.Component {
                 />
             </Card> 
             <div style={styles.formButtonGroup}>
-                <Button 
+                <Button                     
+                    onMouseDown={list ? this.handleAddList : this.handleAddCard}
                     variant="contained" 
                     style={{color: "white", backgroundColor: "#5aaC44"}}>
                     {buttonTitle}{" "}
@@ -122,4 +152,4 @@ const styles = {
     }
 };
 
-export default CompActionButton;
+export default connect()(CompActionButton);

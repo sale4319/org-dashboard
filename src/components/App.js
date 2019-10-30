@@ -9,11 +9,15 @@ class App extends Component {
     const { lists } = this.props;
       return (
         <div className="App">
-          <h1>Hello React!</h1>
+          <h1>Potential Dashboard</h1>
           <div style={styles.listsContainer}>
             {/* Importing CompList component and data from reducer */}
             {lists.map(list => (           
-              <CompList key={list.id} title={list.title} cards={list.cards} />
+              <CompList 
+                listID={list.id} 
+                key={list.id} 
+                title={list.title} 
+                cards={list.cards} />
               ))}
               {/* Importing Add list button */}
               <CompActionButton list />
