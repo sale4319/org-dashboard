@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import CompList from './CompList';
 import { connect } from 'react-redux';
+import CompActionButton from './CompActionButton';
 
 class App extends Component {
   render() {
@@ -12,8 +13,10 @@ class App extends Component {
           <div style={styles.listsContainer}>
             {/* Importing CompList component and data from reducer */}
             {lists.map(list => (           
-              <CompList title={list.title} cards={list.cards} />
+              <CompList key={list.id} title={list.title} cards={list.cards} />
               ))}
+              {/* Importing Add list button */}
+              <CompActionButton list />
           </div>
         </div>
       );

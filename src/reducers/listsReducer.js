@@ -16,7 +16,7 @@ const initialState = [
     },
     {
     title: "This Update",
-    id: 0,
+    id: 1,
     cards: [
             {
                 id: 0,
@@ -30,7 +30,7 @@ const initialState = [
     },
     {
     title: "Next Update",
-    id: 0,
+    id: 2,
     cards: [
             {
                 id: 0,
