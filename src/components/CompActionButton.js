@@ -112,6 +112,7 @@ class CompActionButton extends React.Component {
                     style={{
                         resize: "none",
                         width: "100%",
+                        overFlow: "hidden",
                         outline: "none",
                         border: "none"
                     }}

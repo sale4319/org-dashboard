@@ -1,52 +1,52 @@
 import { CONSTANTS } from '../actions';
 
-let listID = 9;
-let cardID = 22;
+let listID = 4;
+let cardID = 7;
 
 const initialState = [
     {
     //Static mock data
     title: "Last Update",
-    id: 0,
+    id: `list-${0}`,
     cards: [
             {
-                id: 0,
+                id: `card-${0}`,
                 text: "Added Redux state"
             },
             {
-                id: 1,
+                id: `card-${1}`,
                 text: "Mapped Redux data"
             },
         ]
     },
     {
     title: "This Update",
-    id: 1,
+    id: `list-${1}`,
     cards: [
             {
-                id: 3,
+                id: `card-${3}`,
                 text: "Added Add Card/list button"
             },
             {
-                id: 4,
+                id: `card-${4}`,
                 text: "Added Add Card/list functionality"
             },
         ],
     },
     {
     title: "Next Update",
-    id: 2,
+    id: `list-${2}`,
     cards: [
             {
-                id: 5,
+                id: `card-${5}`,
                 text: "Drag and drop card between lists"
             },
             {
-                id: 6,
+                id: `card-${6}`,
                 text: "Hopefully"
             },
             {
-                id: 7,
+                id: `card-${7}`,
                 text: "Mock"
             },
         ],
@@ -60,7 +60,7 @@ const listsReducer = (state = initialState, action) => {
             const newList = {
                 title: action.payload,
                 cards: [],
-                id: listID
+                id: `list-${listID}`
         }
             listID =+ 1;
             return [...state, newList];
@@ -68,7 +68,7 @@ const listsReducer = (state = initialState, action) => {
         case CONSTANTS.ADD_CARD:
             const newCard = {
                 text: action.payload.text,
-                id: cardID,
+                id: `card-${cardID}`,
 
             }
             cardID += 1;
