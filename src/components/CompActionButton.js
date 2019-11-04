@@ -69,9 +69,8 @@ class CompActionButton extends React.Component {
         return (
             <div 
                 onClick={this.openForm}
-                 // Inline CSS need to move it to external file
-                style={{
-                    ...styles.openFormButtonGroup,
+                className="openFormButtonGroup"
+                style={{ 
                     opacity: buttonTextOpacity, 
                     color:buttonTextColor,
                     backgroundColor: buttonTextBackground
@@ -108,17 +107,10 @@ class CompActionButton extends React.Component {
                     onBlur={this.closeForm}
                     value={this.state.text}
                     onChange={this.handleInputChange}
-                    // Inline CSS need to move it to external file
-                    style={{
-                        resize: "none",
-                        width: "100%",
-                        overFlow: "hidden",
-                        outline: "none",
-                        border: "none"
-                    }}
+                    className="textAreaStyle"
                 />
             </Card> 
-            <div style={styles.formButtonGroup}>
+            <div className="formButtonGroup">
                 <Button                     
                     onMouseDown={list ? this.handleAddList : this.handleAddCard}
                     variant="contained" 
@@ -134,23 +126,5 @@ class CompActionButton extends React.Component {
         return this.state.formOpen ? this.renderForm() : this.renderAddButton();
     }
 }
-
-//Temp CCS need to move it to external file
-const styles = {
-    openFormButtonGroup: {
-        display: "flex",
-        alignItems: "center",
-        cursor: "pointer",
-        borderRadius: 3,
-        height: 36,
-        width: 272,
-        paddingLeft: 10
-    },
-    formButtonGroup: {
-        marginTop: 8,
-        display: "flex",
-        alignItems: "center"
-    }
-};
 
 export default connect()(CompActionButton);

@@ -1,0 +1,42 @@
+.container {
+  background-color: #dfe3e6;
+  border-radius: 3;
+  width: 300px;
+  padding: 8px;
+  height: 100%;
+  margin-right: 8px;
+}
+
+.listsContainer {
+    display: flex;
+    flex-direction: row;
+  }
+
+.cardContainer {
+    margin-bottom: 8px;
+  }
+
+.textAreaStyle {
+  resize: none;
+  width: 100%;
+  overFlow: hidden;
+  outline: none;
+  border: none;
+}
+
+.openFormButtonGroup {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 3px;
+  height: 36px;
+  width: 272px;
+  padding-left: 10px;
+}
+
+.formButtonGroup {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+}
+  

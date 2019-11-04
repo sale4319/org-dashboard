@@ -9,11 +9,13 @@ const CompCard = ({ text, id, index }) => {
     return(
       <Draggable draggableId={String(id)} index={index}>
         {provided => (
-        <div ref={provided.innerRef} 
+        <div 
+            className="cardContainer"  
+            ref={provided.innerRef} 
             {...provided.draggableProps} 
             {...provided.dragHandleProps}
         > 
-          <Card style = {styles.cardContainer}>
+          <Card>
             <CardContent>
             <Typography gutterBottom>
               {/* Passing data from listReducer */}
@@ -27,10 +29,4 @@ const CompCard = ({ text, id, index }) => {
     )
 };
 
-//Temp CCS need to move it to external file
-const styles = {
-  cardContainer: {
-    marginBottom: 8
-  }
-};
 export default CompCard;

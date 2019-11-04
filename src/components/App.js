@@ -3,11 +3,29 @@ import CompList from './CompList';
 import { connect } from 'react-redux';
 import CompActionButton from './CompActionButton';
 import { DragDropContext } from 'react-beautiful-dnd';
+import { sort } from '../actions';
+
+import './App.css';
 
 class App extends Component {
 
-  onDragEnd = () => {
+  onDragEnd = (result) => {
     //Reordering logic
+    const { destination, source, draggableId } = result;
+
+    if(!destination) {
+      return;
+    }
+
+    this.props.dispatch(
+      sort (
+        source.droppableId,
+        destination.droppableId,
+        source.index,
+        destination.index,
+        draggableId
+        )
+      );
   };
 
   render() {
@@ -15,16 +33,17 @@ class App extends Component {
     const { lists } = this.props;
       return (
         <DragDropContext onDragEnd={this.onDragEnd}>
-          <div className="App">
+          <div>
             <h1>Potential Dashboard</h1>
-            <div style={styles.listsContainer}>
+            <div className="listsContainer">
               {/* Importing CompList component and data from reducer */}
               {lists.map(list => (           
                 <CompList 
                   listID={list.id} 
                   key={list.id} 
                   title={list.title} 
-                  cards={list.cards} />
+                  cards={list.cards} 
+                />
                 ))}
                 {/* Importing Add list button */}
                 <CompActionButton list />
@@ -33,14 +52,6 @@ class App extends Component {
         </DragDropContext>
       );
   } 
-}
-
-//Temp CCS need to move it to external file
-const styles ={
-  listsContainer: {
-    display: "flex",
-    flexDirection: "row",
-  }
 }
 
 //Mapping state from Reducers (Redux convention)

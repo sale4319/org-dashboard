@@ -17,7 +17,11 @@ const initialState = [
                 id: `card-${1}`,
                 text: "Mapped Redux data"
             },
-        ]
+            {
+                id: `card-${2}`,
+                text: "Added Add Card/list button"
+            },
+        ],
     },
     {
     title: "This Update",
@@ -25,11 +29,15 @@ const initialState = [
     cards: [
             {
                 id: `card-${3}`,
-                text: "Added Add Card/list button"
+                text: "Added Add Card/list functionality"
             },
             {
                 id: `card-${4}`,
-                text: "Added Add Card/list functionality"
+                text: "Drag and drop card between lists"
+            },
+            {
+                id: `card-${5}`,
+                text: "Drag and drop card logic"
             },
         ],
     },
@@ -37,17 +45,14 @@ const initialState = [
     title: "Next Update",
     id: `list-${2}`,
     cards: [
-            {
-                id: `card-${5}`,
-                text: "Drag and drop card between lists"
-            },
+            
             {
                 id: `card-${6}`,
                 text: "Hopefully"
             },
             {
                 id: `card-${7}`,
-                text: "Mock"
+                text: "Everything works"
             },
         ],
     }   
@@ -56,7 +61,7 @@ const initialState = [
 
 const listsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case CONSTANTS.ADD_LIST:
+        case CONSTANTS.ADD_LIST: 
             const newList = {
                 title: action.payload,
                 cards: [],
@@ -65,7 +70,7 @@ const listsReducer = (state = initialState, action) => {
             listID =+ 1;
             return [...state, newList];
         
-        case CONSTANTS.ADD_CARD:
+        case CONSTANTS.ADD_CARD: {
             const newCard = {
                 text: action.payload.text,
                 id: `card-${cardID}`,
@@ -85,6 +90,26 @@ const listsReducer = (state = initialState, action) => {
             });
 
             return newState;
+        }
+
+            case CONSTANTS.DRAG_HAPPENED:
+                //Import from listActions
+                const  { 
+                    droppableIdStart,
+                    droppableIdEnd,
+                    droppableIndexStart,
+                    droppableIndexEnd,
+                    draggableId
+                } = action.payload;
+                // Drag & Drop in the same list
+                const newState = [...state];
+                if(droppableIdStart === droppableIdEnd) {
+                    const list = state.find(list => droppableIdStart === list.id);
+                    const card = list.cards.splice(droppableIndexStart, 1)
+                    list.cards.splice(droppableIndexEnd, 0, ...card)
+                }
+
+                return newState;
     
         default:
         return state;

@@ -10,7 +10,8 @@ const CompList = ({ title, cards, listID }) => {
             {provided => (
             <div {...provided.droppableProps} 
                 ref={provided.innerRef} 
-                style={styles.container}
+                className="container"
+                /*style={styles.container}*/
                 >
                 <h4>{title}</h4>
                 {/* Importing CompCard component and data from reducer*/}
@@ -22,14 +23,14 @@ const CompList = ({ title, cards, listID }) => {
                         id={card.id}
                     />
                 ))}
-                    <CompActionButton listID={listID}/>
                 {provided.placeholder}
+                <CompActionButton listID={listID}/>                
             </div>
             )}           
         </Droppable>
     )
 };
-//Temp CCS need to move it to external file
+/*//Temp CCS need to move it to external file
 const styles = {
     container: {
         backgroundColor: "#dfe3e6",
@@ -39,6 +40,6 @@ const styles = {
         height: "100%",
         marginRight: 8
     }
-};
+};*/
 
 export default CompList;
