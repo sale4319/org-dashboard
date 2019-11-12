@@ -2,16 +2,16 @@ import React, {Component} from 'react';
 import CompList from './CompList';
 import { connect } from 'react-redux';
 import CompActionButton from './CompActionButton';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { sort } from '../actions';
 
 import './App.css';
 
 class App extends Component {
 
-  onDragEnd = (result) => {
+  onDragEnd = result => {
     //Reordering logic
-    const { destination, source, draggableId } = result;
+    const { destination, source, draggableId, type } = result;
 
     if(!destination) {
       return;
@@ -23,7 +23,8 @@ class App extends Component {
         destination.droppableId,
         source.index,
         destination.index,
-        draggableId
+        draggableId,
+        type
         )
       );
   };
@@ -35,19 +36,29 @@ class App extends Component {
         <DragDropContext onDragEnd={this.onDragEnd}>
           <div>
             <h1>Potential Dashboard</h1>
-            <div className="listsContainer">
-              {/* Importing CompList component and data from reducer */}
-              {lists.map(list => (           
-                <CompList 
-                  listID={list.id} 
-                  key={list.id} 
-                  title={list.title} 
-                  cards={list.cards} 
-                />
-                ))}
-                {/* Importing Add list button */}
-                <CompActionButton list />
-            </div>
+            <Droppable droppableId="all-lists" direction="horizontal" type="list">
+              {provided => (     
+              <div 
+                className="listsContainer" 
+                {...provided.droppableProps} 
+                ref={provided.innerRef}
+                >
+                {/* Importing CompList component and data from reducer */}
+                {lists.map((list, index) => (           
+                  <CompList 
+                    listID={list.id} 
+                    key={list.id} 
+                    title={list.title} 
+                    cards={list.cards}
+                    index={index} 
+                  />
+                  ))}
+                  {provided.placeholder}
+                  {/* Importing Add list button */}
+                  <CompActionButton list />
+              </div>
+              )}
+            </Droppable>
           </div>
         </DragDropContext>
       );

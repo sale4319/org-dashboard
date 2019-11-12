@@ -1,45 +1,43 @@
 import React from 'react';
 import CompCard from './CompCard';
 import CompActionButton from './CompActionButton';
-import { Droppable } from 'react-beautiful-dnd';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 // Pass elements from reducers
-const CompList = ({ title, cards, listID }) => {
+const CompList = ({ title, cards, listID, index }) => {
     return (
-        <Droppable droppableId={String(listID)}>
+        <Draggable draggableId={String(listID)} index={index}>
             {provided => (
-            <div {...provided.droppableProps} 
-                ref={provided.innerRef} 
+            <div 
                 className="container"
-                /*style={styles.container}*/
+                {...provided.draggableProps} 
+                ref={provided.innerRef}
+                {...provided.dragHandleProps}              
                 >
-                <h4>{title}</h4>
-                {/* Importing CompCard component and data from reducer*/}
-                {cards.map((card, index) => (
-                    <CompCard 
-                        key={card.id} 
-                        index={index} 
-                        text={card.text} 
-                        id={card.id}
-                    />
-                ))}
-                {provided.placeholder}
-                <CompActionButton listID={listID}/>                
-            </div>
+            <Droppable droppableId={String(listID)}>
+            {provided => (
+                <div {...provided.droppableProps} ref={provided.innerRef}>
+                    <h4>{title}</h4>
+                    {/* Importing CompCard component and data from reducer*/}
+                    {cards.map((card, index) => (
+                        <CompCard 
+                            key={card.id} 
+                            index={index} 
+                            text={card.text} 
+                            id={card.id}
+                        />
+                    ))}
+                    {provided.placeholder}
+                    <CompActionButton listID={listID}/>                
+                </div>
             )}           
-        </Droppable>
-    )
+            </Droppable>
+            </div>
+            )}
+        </Draggable>        
+       
+    );
 };
-/*//Temp CCS need to move it to external file
-const styles = {
-    container: {
-        backgroundColor: "#dfe3e6",
-        borderRadius: 3,
-        width: 300,
-        padding: 8,
-        height: "100%",
-        marginRight: 8
-    }
-};*/
+
 
 export default CompList;

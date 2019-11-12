@@ -48,11 +48,11 @@ const initialState = [
             
             {
                 id: `card-${6}`,
-                text: "Hopefully"
+                text: "Login, Sign Up, Edit, Delete cards/lists, Navbar"
             },
             {
                 id: `card-${7}`,
-                text: "Everything works"
+                text: "Small backend, Styling"
             },
         ],
     }   
@@ -99,14 +99,49 @@ const listsReducer = (state = initialState, action) => {
                     droppableIdEnd,
                     droppableIndexStart,
                     droppableIndexEnd,
-                    draggableId
+                    draggableId,
+                    type
                 } = action.payload;
-                // Drag & Drop in the same list
+
+                
                 const newState = [...state];
+
+                // D&D lists
+                if(type === "list") {
+
+                    // Grab the list
+                    const list = newState.splice(droppableIndexStart, 1);
+
+                    // Drop the list to new position
+                    newState.splice(droppableIndexEnd, 0, ...list);
+                    return newState;
+                }
+
+                // Drag & Drop in the same list
                 if(droppableIdStart === droppableIdEnd) {
+                    // Find the list in which drag happened
                     const list = state.find(list => droppableIdStart === list.id);
+
+                    // Pull the card from initial position on the list
                     const card = list.cards.splice(droppableIndexStart, 1)
+
+                    // Put the card to new position on the list
                     list.cards.splice(droppableIndexEnd, 0, ...card)
+                }
+
+                //D&D to other lists
+                if(droppableIdStart !== droppableIdEnd) {
+                    // Find the list in which drag happened
+                    const listStart = state.find(list => droppableIdStart === list.id);
+
+                    // Pull out the cart from the list
+                    const card = listStart.cards.splice(droppableIndexStart, 1);
+
+                    // Find the list where drag ended
+                    const listEnd = state.find(list => droppableIdEnd === list.id);
+
+                    // Put the card in the new list
+                    listEnd.cards.splice(droppableIndexEnd, 0, ...card)
                 }
 
                 return newState;
