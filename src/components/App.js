@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import CompList from './CompList';
 import { connect } from 'react-redux';
-import CompActionButton from './CompActionButton';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { sort } from '../actions';
+
+import CompList from './CompList';
+import CompActionButton from './CompActionButton';
+import CompNavbar from './CompNavbar';
 
 import './App.css';
 
@@ -33,9 +35,11 @@ class App extends Component {
     
     const { lists } = this.props;
       return (
+        
         <DragDropContext onDragEnd={this.onDragEnd}>
-          <div>
-            <h1>Potential Dashboard</h1>
+          <CompNavbar />
+            <br/>
+          <div>           
             <Droppable droppableId="all-lists" direction="horizontal" type="list">
               {provided => (     
               <div 
