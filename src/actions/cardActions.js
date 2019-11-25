@@ -6,3 +6,10 @@ export const addCard = (listID, text) => {
         payload: {text, listID}
     };
 };
+
+export const deleteCard = (listID, text) => {
+    return {
+        type: CONSTANTS.DELETE_CARD,
+        payload: {text, listID}
+    };
+};

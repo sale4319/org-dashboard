@@ -1,57 +1,58 @@
 import { CONSTANTS } from '../actions';
+import uuid from 'uuid';
 
-let listID = 4;
-let cardID = 7;
+let listID = uuid();
+let cardID = uuid();
 
 const initialState = [
     {
     //Static mock data
     title: "Last Update",
-    id: `list-${0}`,
+    id: uuid(),
     cards: [
             {
-                id: `card-${0}`,
+                id: uuid(),
                 text: "Added Redux state"
             },
             {
-                id: `card-${1}`,
+                id: uuid(),
                 text: "Mapped Redux data"
             },
             {
-                id: `card-${2}`,
+                id: uuid(),
                 text: "Added Add Card/list button"
             },
         ],
     },
     {
     title: "This Update",
-    id: `list-${1}`,
+    id: uuid(),
     cards: [
             {
-                id: `card-${3}`,
+                id: uuid(),
                 text: "Added Add Card/list functionality"
             },
             {
-                id: `card-${4}`,
+                id: uuid(),
                 text: "Drag and drop card between lists"
             },
             {
-                id: `card-${5}`,
+                id: uuid(),
                 text: "Drag and drop card logic"
             },
         ],
     },
     {
     title: "Next Update",
-    id: `list-${2}`,
+    id: uuid(),
     cards: [
             
             {
-                id: `card-${6}`,
+                id: uuid(),
                 text: "Login, Sign Up, Edit, Delete cards/lists, Navbar"
             },
             {
-                id: `card-${7}`,
+                id: uuid(),
                 text: "Small backend, Styling"
             },
         ],
