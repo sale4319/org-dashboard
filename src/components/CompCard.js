@@ -23,10 +23,13 @@ const CompCard = ({ text, id, index }) => {
           <Card>
             <CardContent>
             <Typography gutterBottom>
+              <div className="topcorner">
+                <CompEditDelete />
+              </div>
               {/* Passing data from listReducer */}
               {text}
               {/* Need to make Edit/Delete Component */}
-              <CompEditDelete />
+              
             </Typography>
             </CardContent>
           </Card>
