@@ -4,7 +4,8 @@ import CompActionButton from './CompActionButton';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 // Pass elements from reducers
-const CompList = ({ title, cards, listID, index }) => {
+const CompList = ({ title, cards, listID, index, dispatch }) => {
+    
     return (
         <Draggable draggableId={String(listID)} index={index}>
             {provided => (
@@ -25,6 +26,8 @@ const CompList = ({ title, cards, listID, index }) => {
                             index={index} 
                             text={card.text} 
                             id={card.id}
+                            listId={listID}
+                            dispatch={dispatch}
                         />
                     ))}
                     {provided.placeholder}

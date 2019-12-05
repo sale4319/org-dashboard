@@ -5,23 +5,14 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { deleteCard } from '../actions';
 
-const options = [
-  <IconButton aria-label="edit" >
-    <EditIcon fontSize="small" />
-  </IconButton>,
-
-  <IconButton aria-label="delete"
-   
-  >
-    <DeleteIcon fontSize="small" />
-  </IconButton>,
-  
-];
+const options = ['edit','delete'];
 
 const ITEM_HEIGHT = 48;
 
-export default function LongMenu() {
+const LongMenu = ({ cardId, listId,dispatch }) => {
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -29,7 +20,13 @@ export default function LongMenu() {
     setAnchorEl(event.currentTarget);
   };
 
+  
   const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleDelete = ( cardId, listId) => {
+    dispatch(deleteCard(cardId,listId))
     setAnchorEl(null);
   };
 
@@ -56,12 +53,22 @@ export default function LongMenu() {
           },
         }}
       >
-        {options.map(option => (
-          <MenuItem key={option} selected={option === 'Pixys'} onClick={handleClose}>
-            {option}
+        {options.map((option,index) => (
+          <MenuItem key={index} onClick={()=>
+          {
+            if(option==='delete')
+                {
+                  handleDelete(cardId, listId)
+                }
+          }}>
+            <IconButton aria-label={option} >
+            {option ==="delete" ?  <DeleteIcon fontSize="small" /> : <EditIcon fontSize="small" />}
+             </IconButton>
           </MenuItem>
         ))}
       </Menu>
     </div>
   );
 }
+
+export default LongMenu;

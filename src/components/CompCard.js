@@ -7,10 +7,8 @@ import { Draggable } from 'react-beautiful-dnd';
 import CompEditDelete from './CompEditDelete';
 
 
-
-
-const CompCard = ({ text, id, index }) => {
-
+const CompCard = ({ text, id, index ,listId,dispatch}) => {
+   
     return(
       <Draggable draggableId={String(id)} index={index}>
         {provided => (
@@ -21,16 +19,11 @@ const CompCard = ({ text, id, index }) => {
             {...provided.dragHandleProps}
         > 
           <Card>
-            <CardContent>
-            <Typography gutterBottom>
-              <div className="topcorner">
-                <CompEditDelete />
-              </div>
-              {/* Passing data from listReducer */}
+            <CardContent  style={{display:'flex',flexDirection:'row'}}>
+            <Typography gutterBottom style={{display:'flex',flex:1}}>
               {text}
-              {/* Need to make Edit/Delete Component */}
-              
             </Typography>
+            <CompEditDelete cardId={id} listId={listId} dispatch={dispatch}/>
             </CardContent>
           </Card>
         </div>
