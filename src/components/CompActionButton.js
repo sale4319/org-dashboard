@@ -34,7 +34,7 @@ class CompActionButton extends React.Component {
         const { dispatch } = this.props;
         const { text } = this.state;
 
-        if(text) {
+        if (text) {
             this.setState({
                 text: ""
             });
@@ -48,7 +48,7 @@ class CompActionButton extends React.Component {
         const { dispatch, listID } = this.props;
         const { text } = this.state;
 
-        if(text) {
+        if (text) {
             this.setState({
                 text: ""
             });
@@ -62,17 +62,17 @@ class CompActionButton extends React.Component {
 
         //Reusable optional button properties
         const buttonText = list ? "Add another list" : "Add another card";
-        const buttonTextOpacity = list ? 1: 0.5;
+        const buttonTextOpacity = list ? 1 : 0.5;
         const buttonTextColor = list ? "white" : "inherit";
         const buttonTextBackground = list ? "rgba(0,0,0,.15" : "inherit";
 
         return (
-            <div 
+            <div
                 onClick={this.openForm}
                 className="openFormButtonGroup"
-                style={{ 
-                    opacity: buttonTextOpacity, 
-                    color:buttonTextColor,
+                style={{
+                    opacity: buttonTextOpacity,
+                    color: buttonTextColor,
                     backgroundColor: buttonTextBackground
                 }}
             >
@@ -87,21 +87,21 @@ class CompActionButton extends React.Component {
 
         const { list } = this.props;
 
-        const placeholder = list 
-        ? "Enter list title..." 
-        : "Enter title for this card...";
+        const placeholder = list
+            ? "Enter list title..."
+            : "Enter title for this card...";
 
         const buttonTitle = list ? "Add List" : "Add Card";
 
-        return <div> 
+        return <div>
             <Card style={{
                 overFlow: "visible",
                 minHeight: 80,
                 minWidth: 272,
                 padding: "6px 8px 2px"
-                }}
+            }}
             >
-                <Textarea 
+                <Textarea
                     placeholder={placeholder}
                     autoFocus
                     onBlur={this.closeForm}
@@ -109,15 +109,15 @@ class CompActionButton extends React.Component {
                     onChange={this.handleInputChange}
                     className="textAreaStyle"
                 />
-            </Card> 
+            </Card>
             <div className="formButtonGroup">
-                <Button                     
+                <Button
                     onMouseDown={list ? this.handleAddList : this.handleAddCard}
-                    variant="contained" 
-                    style={{color: "white", backgroundColor: "#5aaC44"}}>
+                    variant="contained"
+                    style={{ color: "white", backgroundColor: "#5aaC44" }}>
                     {buttonTitle}{" "}
                 </Button>
-                <Icon style={{ marginLeft: 8, cursor: "pointer"}}>close</Icon>
+                <Icon style={{ marginLeft: 8, cursor: "pointer" }} onClick={this.closeForm}>close</Icon>
             </div>
         </div>
     };

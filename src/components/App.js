@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { sort } from '../actions';
@@ -15,59 +15,59 @@ class App extends Component {
     //Reordering logic
     const { destination, source, draggableId, type } = result;
 
-    if(!destination) {
+    if (!destination) {
       return;
     }
 
     this.props.dispatch(
-      sort (
+      sort(
         source.droppableId,
         destination.droppableId,
         source.index,
         destination.index,
         draggableId,
         type
-        )
-      );
+      )
+    );
   };
 
   render() {
-    
+
     const { lists } = this.props;
-      return (
-        
-        <DragDropContext onDragEnd={this.onDragEnd}>
-          <CompNavbar />
-            <br/>
-          <div>           
-            <Droppable droppableId="all-lists" direction="horizontal" type="list">
-              {provided => (     
-              <div 
-                className="listsContainer" 
-                {...provided.droppableProps} 
+    return (
+
+      <DragDropContext onDragEnd={this.onDragEnd}>
+        <CompNavbar />
+        <br />
+        <div>
+          <Droppable droppableId="all-lists" direction="horizontal" type="list">
+            {provided => (
+              <div
+                className="listsContainer"
+                {...provided.droppableProps}
                 ref={provided.innerRef}
-                >
+              >
                 {/* Importing CompList component and data from reducer */}
-                {lists.map((list, index) => (           
-                  <CompList 
-                    listID={list.id} 
-                    key={list.id} 
-                    title={list.title} 
+                {lists.map((list, index) => (
+                  <CompList
+                    listID={list.id}
+                    key={list.id}
+                    title={list.title}
                     cards={list.cards}
-                    index={index} 
+                    index={index}
                     dispatch={this.props.dispatch}
                   />
-                  ))}
-                  {provided.placeholder}
-                  {/* Importing Add list button */}
-                  <CompActionButton list />
+                ))}
+                {provided.placeholder}
+                {/* Importing Add list button */}
+                <CompActionButton list />
               </div>
-              )}
-            </Droppable>
-          </div>
-        </DragDropContext>
-      );
-  } 
+            )}
+          </Droppable>
+        </div>
+      </DragDropContext>
+    );
+  }
 }
 
 //Mapping state from Reducers (Redux convention)
@@ -75,4 +75,4 @@ const mapStateToProps = state => ({
   lists: state.lists
 });
 
-export default connect (mapStateToProps)(App);
+export default connect(mapStateToProps)(App);
