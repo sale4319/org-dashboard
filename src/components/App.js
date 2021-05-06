@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { sort } from '../actions';
 
-import CompList from './CompList';
-import CompActionButton from './CompActionButton';
-import CompNavbar from './CompNavbar';
+import ComponentList from './ComponentList';
+import ActionButton from './ActionButton';
+import Navbar from './Navbar';
 
 import './App.css';
 
@@ -37,7 +37,7 @@ class App extends Component {
     return (
 
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <CompNavbar />
+        <Navbar />
         <br />
         <div>
           <Droppable droppableId="all-lists" direction="horizontal" type="list">
@@ -47,9 +47,9 @@ class App extends Component {
                 {...provided.droppableProps}
                 ref={provided.innerRef}
               >
-                {/* Importing CompList component and data from reducer */}
+                {/* Importing ComponentList component and data from reducer */}
                 {lists.map((list, index) => (
-                  <CompList
+                  <ComponentList
                     listID={list.id}
                     key={list.id}
                     title={list.title}
@@ -60,7 +60,7 @@ class App extends Component {
                 ))}
                 {provided.placeholder}
                 {/* Importing Add list button */}
-                <CompActionButton list />
+                <ActionButton list />
               </div>
             )}
           </Droppable>

@@ -6,7 +6,7 @@ import Textarea from 'react-textarea-autosize';
 import { connect } from "react-redux";
 import { addList, addCard } from '../actions';
 
-class CompActionButton extends React.Component {
+class ActionButton extends React.Component {
 
     state = {
         formOpen: false
@@ -127,4 +127,4 @@ class CompActionButton extends React.Component {
     }
 }
 
-export default connect()(CompActionButton);
+export default connect()(ActionButton);
