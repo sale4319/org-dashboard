@@ -45,4 +45,14 @@
   top:0px;
   left:0px;
  }
+
+.title {
+    flex-grow: 1;
+    align-items: center;
+    display: flex;
+    color: #fff;
+    font-size: 25px;
+    font-weight: 700;
+    font-family: Libre Baskerville, serif;
+}
   
