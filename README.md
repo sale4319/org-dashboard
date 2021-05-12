@@ -8,4 +8,4 @@ Frontend done in React, Backend only persist with hardcoded data.
 
 #### Preview
 
-https://org-dashboard.herokuapp.com/
+https://org-dashboard.netlify.app/
